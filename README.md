@@ -22,7 +22,7 @@ figures: all plots for SRAFL.
 
 * sklearn
 
-* NVIDIA GPU + CUDA 1150 + CuDNN v5.1
+* NVIDIA GPU + CUDA 11.50 + CuDNN v7.1
 
 * torch 0.8 or later
 
