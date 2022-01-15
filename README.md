@@ -1,6 +1,5 @@
 # SRAFL
 Sequential reinforcement active feature learning for gene signature identification in renal cell carcinoma
-
 ![](https://github.com/linxi159/SRAFL/blob/main/figures/Figure_1_Final.jpg) 
 
 ## Description of each directory
@@ -15,9 +14,7 @@ results: the selected gene signature and different cases.
 figures: all plots for SRAFL.
 
 
-# How to setup
-
-## Prerequisites
+## How to setup
 
 * Python (3.6 or later)
 
@@ -32,12 +29,9 @@ figures: all plots for SRAFL.
 * collections
 
 ## Quick example to use SRAFL
-
 ```
-
 * train and test the model:
 
-```
 python ./src/main.py
 ```
 
