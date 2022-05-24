@@ -5,7 +5,7 @@ Sequential reinforcement active feature learning for gene signature identificati
 ## Description of each directory
 data: the preprocessed data from RCC in TCGA.
 
-src: the implementation of Sequential reinforcement active feature learning.
+src: the implementation of sequential reinforcement active feature learning.
 
 R: the utility of data preprocessing, gene filtering, and plot of experimental result.
 
