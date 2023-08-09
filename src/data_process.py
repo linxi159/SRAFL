@@ -96,3 +96,49 @@ def data_load(data_type='csv', # csv
 #    cost_exp = -abs(np.random.exponential(scale=10,size=n_features))
 #    cost = cost_uniform
 
+class DataTemp:
+    def __init__(self, features, labels, exist, n_classes, shuffle=True, iter=True,
+            action2features=None):
+        self.features = features
+        self.labels = labels
+        self.exist = exist
+        self.shuffle = shuffle
+        self.n_data, self.n_features = features.shape
+        self.n_classes = n_classes
+        self.index = 0
+        self.iter = iter
+        self.action2features = action2features
+        self.n_actions = len(action2features) + 1 if action2features is not None \
+                else features.shape[1] + 1
+
+    def next_batch(self, batch_size):
+        if iter:
+            new_index = (self.index + batch_size) % self.n_data
+        else:
+            if self.index == self.n_data:
+                return None # Done
+            new_index = min(self.index + batch_size, self.n_data)
+
+        if self.index + batch_size <= self.n_data:
+            features = self.features[self.index: self.index + batch_size]
+            labels = self.labels[self.index: self.index + batch_size]
+            exist = self.exist[self.index: self.index + batch_size] \
+                if self.exist is not None else None
+        else:
+            features = self.features[self.index:]
+            labels = self.labels[self.index:]
+            exist = self.exist[self.index:] if self.exist is not None else None
+            if self.iter:
+                if self.shuffle:
+                    p = np.random.permutation(self.n_data)
+                    self.features = self.features[p]
+                    self.labels = self.labels[p]
+                    self.exist = self.exist[p] if self.exist is not None else None
+                features = np.concatenate((features,
+                    self.features[:new_index]), axis=0)
+                labels = np.concatenate((labels,
+                    self.labels[:new_index]), axis=0)
+                exist = np.concatenate((exist, self.exist[:new_index]), axis=0) \
+                        if self.exist is not None else None
+        self.index = new_index
+        return features, labels, exist
